@@ -106,6 +106,8 @@ selectImage(id);
   for (cell=0; cell<n; cell++) {
       roiManager("select", cell);
       ROI_nm = Roi.getName(); 
+      
+setBatchMode(true);
 
 getSelectionCoordinates(vertx, verty);
 c = polygonCentre(vertx,verty);
@@ -256,6 +258,7 @@ print(sortie);
 
 //
 //drawing of directions and cell contour
+setBatchMode(false);
 selectImage(id);
 run("Add Selection...", "stroke=yellow width="+lwidth);
 
@@ -328,6 +331,10 @@ close();
 selectWindow("ROI Manager");
 run("Close");
 
+selectWindow("Log");
+saveAs("text", dir+File.separator+nom2+"_Log.txt" );
+run("Close");
+
 }//end of if( c!=0) i.e. at least one ROI
 
 } //end of if endswith (list[j], format)
@@ -335,9 +342,6 @@ run("Close");
 	} // end of for j=0; j<list.length; j++
 
 //To save the final log and close it
-selectWindow("Log");
-saveAs("text", dir+"Full_Log.txt" );
-run("Close");
 
 
 
